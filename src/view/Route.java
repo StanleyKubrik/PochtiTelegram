@@ -6,4 +6,5 @@ public interface Route{
     void viewLogin();
     void viewChat();
     void setVisible(boolean flag);
+    void dispose();
 }

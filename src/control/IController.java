@@ -1,11 +1,10 @@
 package control;
 
-import io.reactivex.Observable;
-
 public interface IController {
     void login();
+    void connect(String login);
     void chat();
     void send(String message);
-    Observable<String> response();
+    void response();
     void disconnect();
 }

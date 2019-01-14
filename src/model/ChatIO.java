@@ -1,26 +1,27 @@
 package model;
 
-import io.reactivex.Observable;
+import control.Controller;
+import control.IController;
 
 public class ChatIO implements IChatIO {
     @Override
     public void connect(String login) {
-        // TODO
+        // TODO ChatIO connect
     }
 
     @Override
     public void send(String message) {
-        // TODO
+        // TODO ChatIO send
+        // Отправляет сообщение на сервер
     }
 
     @Override
-    public Observable<String> response() {
-        // TODO
-        return null;
+    public void response() {
+        // TODO ChatIO response
     }
 
     @Override
     public void disconnect() {
-        // TODO
+        // TODO ChatIO disconnect
     }
 }
