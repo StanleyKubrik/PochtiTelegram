@@ -17,17 +17,19 @@ public class LoginPanel extends JPanel implements IPanel {
         this.controller = controller;
 
         lbl_login = new JLabel("Login");
-        lbl_login.setBounds(50, 50, 75, 25);
+        lbl_login.setBounds(10, 10, 50, 25);
+        lbl_login.setBackground(Color.BLUE);
 
         txt_login = new JTextArea();
-        txt_login.setBounds(145, 50, 100, 25);
+        txt_login.setBounds(70, 10, 75, 25);
+        txt_login.setBackground(Color.pink);
 
         ok = new JButton("OK");
-        ok.setBounds(50, 200, 50, 25);
+        ok.setBounds(10, 55, 50, 25);
         ok.setBackground(Color.WHITE);
 
         cancel = new JButton("Cancel");
-        cancel.setBounds(150, 200, 50, 25);
+        cancel.setBounds(70, 55, 50, 25);
         cancel.setBackground(Color.WHITE);
 
         add(lbl_login);

@@ -43,12 +43,14 @@ public class Controller implements IController {
 
     @Override
     public void send(String message) {
+        iChatIO.send("ya tut");
         // TODO send
     }
 
     @Override
     public void response() {
         // TODO response
+        iChatIO.response();
     }
 
     @Override

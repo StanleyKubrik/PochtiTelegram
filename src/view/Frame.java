@@ -29,13 +29,14 @@ public class Frame extends JFrame implements Route {
     @Override
     public void viewLogin(){
         setTitle(Constant.TITLE_LOGIN);
-        setBounds(250, 250, 400, 300);
+        setBounds(250, 250, 250, 100);
     }
 
     @Override
     public void viewChat(){
         setTitle(Constant.TITLE_CHAT);
         setBounds(250, 250, 800, 600);
+        setBackground(Color.GRAY);
     }
 
     @Override
