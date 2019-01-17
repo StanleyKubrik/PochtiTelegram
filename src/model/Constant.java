@@ -7,5 +7,5 @@ public abstract class Constant {
     public static final String TAG_msg = "msg:";
     public static final String TAG_exit = "exit:";
     public static final String ADDRESS = "127.0.0.1";
-    public static final String PORT = "7777";
+    public static final int PORT = 7777;
 }

@@ -1,6 +1,7 @@
 package view.login;
 
 import control.Controller;
+import control.IController;
 import view.IPanel;
 
 import javax.swing.*;
@@ -11,9 +12,9 @@ public class LoginPanel extends JPanel implements IPanel {
     private JButton cancel;
     private JLabel lbl_login;
     private JTextArea txt_login;
-    private Controller controller;
+    private IController controller;
 
-    public LoginPanel(Controller controller){
+    public LoginPanel(IController controller){
         this.controller = controller;
         setLayout(null);
 

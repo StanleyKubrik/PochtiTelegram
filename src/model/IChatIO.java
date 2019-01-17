@@ -5,6 +5,6 @@ import io.reactivex.Observable;
 public interface IChatIO {
     void connect(String login);
     void send(String message);
-    void response();
+    Observable<String> response();
     void disconnect();
 }

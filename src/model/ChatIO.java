@@ -1,24 +1,48 @@
 package model;
 
-public class ChatIO implements IChatIO {
+import io.reactivex.Observable;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.concurrent.TimeUnit;
+
+public class ChatIO extends BaseChatIO implements IChatIO {
+
+    public ChatIO() {
+        try {
+            sc = new Socket(Constant.ADDRESS, Constant.PORT);
+            in = new DataInputStream(sc.getInputStream());
+            out = new DataOutputStream(sc.getOutputStream());
+            response = Observable.interval(50, TimeUnit.MILLISECONDS)
+                .flatMap(v -> Observable.just(in.available()))
+                .filter(f -> f > 0)
+                .flatMap(v -> Observable.just(in.readUTF()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void connect(String login) {
-        System.out.println("ChatIO connect");
+        writeUTF(Constant.TAG_login.concat(login));
     }
 
     @Override
     public void send(String message) {
         // Отправляет сообщение на сервер
-        System.out.println("ChatIO " + message);
+        writeUTF(Constant.TAG_msg);
     }
 
     @Override
-    public void response() {
-        System.out.println("ChatIO response");
+    public Observable<String> response() {
+        return response.filter(f -> f != null && !f.isEmpty());
     }
 
     @Override
     public void disconnect() {
-        System.out.println("ChatIO disconnect");
+        writeUTF(Constant.TAG_exit);
+        disconnect();
+        compositeDisposable.dispose();
     }
 }

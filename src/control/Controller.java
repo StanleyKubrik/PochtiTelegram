@@ -1,5 +1,6 @@
 package control;
 
+import io.reactivex.disposables.CompositeDisposable;
 import model.ChatIO;
 import model.IChatIO;
 import view.Frame;
@@ -12,6 +13,7 @@ public class Controller implements IController {
     private Route route;
     private IChatIO iChatIO;
     private IPanel iPanel;
+    private CompositeDisposable compositeDisposable;
 
     public Controller(){
         route = new Frame();
@@ -27,13 +29,13 @@ public class Controller implements IController {
 
     @Override
     public void connect(String login) {
+        compositeDisposable = new CompositeDisposable();
         iChatIO = new ChatIO();
         iChatIO.connect(login);
         chat();
     }
 
-    @Override
-    public void chat() {
+    private void chat() {
         route.remove(iPanel);
         iPanel = new ChatPanel(this);
         route.viewChat();
@@ -43,12 +45,14 @@ public class Controller implements IController {
 
     @Override
     public void send(String message) {
-        iChatIO.send("ya tut");
+        iChatIO.send(message);
     }
 
     @Override
     public void response() {
-        iChatIO.response();
+        compositeDisposable.add(
+            iChatIO.response().subscribe(v -> iPanel.response(v), Throwable::printStackTrace)
+        );
     }
 
     @Override
