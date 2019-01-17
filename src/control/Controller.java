@@ -33,6 +33,7 @@ public class Controller implements IController {
         iChatIO = new ChatIO();
         iChatIO.connect(login);
         chat();
+        response();
     }
 
     private void chat() {

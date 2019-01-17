@@ -1,6 +1,7 @@
 package model;
 
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,12 +12,12 @@ public class ChatIO extends BaseChatIO implements IChatIO {
 
     public ChatIO() {
         try {
-            sc = new Socket(Constant.ADDRESS, Constant.PORT);
-            in = new DataInputStream(sc.getInputStream());
-            out = new DataOutputStream(sc.getOutputStream());
-            response = Observable.interval(50, TimeUnit.MILLISECONDS)
-                .flatMap(v -> Observable.just(in.available()))
-                .filter(f -> f > 0)
+            cs = new Socket(Constant.ADDRESS, Constant.PORT);
+            in = new DataInputStream(cs.getInputStream());
+            out = new DataOutputStream(cs.getOutputStream());
+            response = Observable.interval(50, TimeUnit.MILLISECONDS, Schedulers.io())
+                .flatMap(v -> Observable.just(in.available())
+                    .filter(f -> f > 0))
                 .flatMap(v -> Observable.just(in.readUTF()));
         } catch (IOException e) {
             e.printStackTrace();
