@@ -15,7 +15,6 @@ public class ChatPanel extends JPanel implements IPanel {
         this.controller = controller;
         setLayout(null);
         setBackground(Color.DARK_GRAY);
-        listener();
 
         txt_message_in = new JTextArea();
         txt_message_in.setBounds(10, 10, 765, 450);
@@ -35,6 +34,8 @@ public class ChatPanel extends JPanel implements IPanel {
         add(txt_message_in);
         add(send);
         add(exit);
+
+        listener();
     }
 
     private void listener(){
@@ -43,13 +44,11 @@ public class ChatPanel extends JPanel implements IPanel {
             txt_message_out.setText("");
         });
 
-        exit.addActionListener(v -> {
-            controller.disconnect();
-        });
+        exit.addActionListener(v -> controller.disconnect());
     }
 
     @Override
     public void response(String message) {
-        txt_message_in.getText();
+        txt_message_in.append(message.concat("\n"));
     }
 }

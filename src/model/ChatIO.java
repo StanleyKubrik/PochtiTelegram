@@ -32,7 +32,7 @@ public class ChatIO extends BaseChatIO implements IChatIO {
     @Override
     public void send(String message) {
         // Отправляет сообщение на сервер
-        writeUTF(Constant.TAG_msg);
+        writeUTF(Constant.TAG_msg.concat(message));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ChatIO extends BaseChatIO implements IChatIO {
     @Override
     public void disconnect() {
         writeUTF(Constant.TAG_exit);
-        disconnect();
-        compositeDisposable.dispose();
+        super.disconnect();
+        //compositeDisposable.dispose();
     }
 }
