@@ -14,17 +14,13 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class ChatIO extends BaseChatIO implements IChatIO {
 
     public ChatIO() throws IOException {
-        try {
-            cs = new Socket(Constant.ADDRESS, Constant.PORT);
-            in = new DataInputStream(cs.getInputStream());
-            out = new DataOutputStream(cs.getOutputStream());
-            response = Observable.interval(50, TimeUnit.MILLISECONDS, Schedulers.io())
-                .flatMap(v -> Observable.just(in.available())
-                    .filter(f -> f > 0))
-                .flatMap(v -> Observable.just(in.readUTF()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cs = new Socket(Constant.ADDRESS, Constant.PORT);
+        in = new DataInputStream(cs.getInputStream());
+        out = new DataOutputStream(cs.getOutputStream());
+        response = Observable.interval(50, TimeUnit.MILLISECONDS, Schedulers.io())
+            .flatMap(v -> Observable.just(in.available())
+                .filter(f -> f > 0))
+            .flatMap(v -> Observable.just(in.readUTF()));
     }
 
     @Override

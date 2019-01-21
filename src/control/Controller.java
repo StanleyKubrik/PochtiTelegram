@@ -41,7 +41,6 @@ public class Controller implements IController {
             chat();
             response();
         } catch (ConnectException e) {
-            // TODO
             showMessageDialog(null, "Server do not response!");
         } catch (IOException e) {
             e.printStackTrace();
