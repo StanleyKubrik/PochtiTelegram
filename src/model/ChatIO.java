@@ -5,8 +5,11 @@ import io.reactivex.schedulers.Schedulers;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class ChatIO extends BaseChatIO implements IChatIO {
 
@@ -19,6 +22,8 @@ public class ChatIO extends BaseChatIO implements IChatIO {
                 .flatMap(v -> Observable.just(in.available())
                     .filter(f -> f > 0))
                 .flatMap(v -> Observable.just(in.readUTF()));
+        } catch (ConnectException e) {
+            showMessageDialog(null, "Server do not response!");
         } catch (IOException e) {
             e.printStackTrace();
         }

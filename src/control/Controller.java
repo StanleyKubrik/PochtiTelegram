@@ -58,6 +58,7 @@ public class Controller implements IController {
 
     @Override
     public void disconnect() {
+        compositeDisposable.dispose();
         if (iChatIO != null){
             iChatIO.disconnect();
             iChatIO = null;
