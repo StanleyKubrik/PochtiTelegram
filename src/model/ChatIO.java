@@ -13,7 +13,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class ChatIO extends BaseChatIO implements IChatIO {
 
-    public ChatIO() {
+    public ChatIO() throws IOException {
         try {
             cs = new Socket(Constant.ADDRESS, Constant.PORT);
             in = new DataInputStream(cs.getInputStream());
@@ -22,8 +22,6 @@ public class ChatIO extends BaseChatIO implements IChatIO {
                 .flatMap(v -> Observable.just(in.available())
                     .filter(f -> f > 0))
                 .flatMap(v -> Observable.just(in.readUTF()));
-        } catch (ConnectException e) {
-            showMessageDialog(null, "Server do not response!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,7 +33,7 @@ public class ChatIO extends BaseChatIO implements IChatIO {
     }
 
     @Override
-    public void send(String message) {
+    public void send(String message) throws IOException {
         // Отправляет сообщение на сервер
         writeUTF(Constant.TAG_msg.concat(message));
     }

@@ -9,6 +9,11 @@ import view.Route;
 import view.chat.ChatPanel;
 import view.login.LoginPanel;
 
+import java.io.IOException;
+import java.net.ConnectException;
+
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class Controller implements IController {
     private Route route;
     private IChatIO iChatIO;
@@ -30,10 +35,17 @@ public class Controller implements IController {
     @Override
     public void connect(String login) {
         compositeDisposable = new CompositeDisposable();
-        iChatIO = new ChatIO();
-        iChatIO.connect(login);
-        chat();
-        response();
+        try {
+            iChatIO = new ChatIO();
+            iChatIO.connect(login);
+            chat();
+            response();
+        } catch (ConnectException e) {
+            // TODO
+            showMessageDialog(null, "Server do not response!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void chat() {
@@ -46,7 +58,13 @@ public class Controller implements IController {
 
     @Override
     public void send(String message) {
-        iChatIO.send(message);
+        try {
+            iChatIO.send(message);
+        } catch (ConnectException e) {
+            showMessageDialog(null, "Server do not response!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
