@@ -14,8 +14,6 @@ public abstract class BaseChatIO {
     protected CompositeDisposable compositeDisposable;
     protected Observable<String> response;
 
-    protected abstract void connect(String login);
-
     protected void writeUTF(String message){
         if (cs != null && cs.isConnected() && out != null){
             try {
