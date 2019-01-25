@@ -59,8 +59,8 @@ public class Controller implements IController {
     public void send(String message) {
         try {
             iChatIO.send(message);
-        } catch (ConnectException e) {
-            showMessageDialog(null, "Server do not response!");
+//        } catch (ConnectException e) {
+//            showMessageDialog(null, "Server do not response!");
         } catch (IOException e) {
             e.printStackTrace();
         }
