@@ -8,5 +8,5 @@ public interface IChatIO {
     void connect(String login);
     void send(String message) throws IOException;
     Observable<String> response();
-    void disconnect();
+    void disconnect(); //throws IOException;
 }

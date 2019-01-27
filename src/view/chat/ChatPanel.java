@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class ChatPanel extends JPanel implements IPanel {
     private JTextArea txt_message_out, txt_message_in;
+    private JScrollPane scrollPane;
     private JButton send;
     private JButton exit;
     private IController controller;
@@ -17,8 +18,9 @@ public class ChatPanel extends JPanel implements IPanel {
         setBackground(Color.DARK_GRAY);
 
         txt_message_in = new JTextArea();
-        txt_message_in.setBounds(10, 10, 765, 450);
-        txt_message_in.setBackground(Color.WHITE);
+        scrollPane = new JScrollPane(txt_message_in);
+        scrollPane.setBounds(10, 10, 765, 450);
+        scrollPane.setBackground(Color.WHITE);
 
         txt_message_out = new JTextArea();
         txt_message_out.setBounds(10, 475, 600, 25);
@@ -31,7 +33,7 @@ public class ChatPanel extends JPanel implements IPanel {
         exit.setBounds(700, 475, 75, 25);
 
         add(txt_message_out);
-        add(txt_message_in);
+        add(scrollPane);
         add(send);
         add(exit);
 

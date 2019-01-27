@@ -8,8 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LoginPanel extends JPanel implements IPanel {
-    private JButton ok;
-    private JButton cancel;
+    private JButton ok, cancel;
     private JLabel lbl_login;
     private JTextArea txt_login;
     private IController controller;
@@ -38,6 +37,10 @@ public class LoginPanel extends JPanel implements IPanel {
         add(ok);
         add(cancel);
 
+        listener();
+    }
+
+    private void listener() {
         ok.addActionListener(v -> controller.connect(txt_login.getText()));
 
         cancel.addActionListener(v -> controller.disconnect());

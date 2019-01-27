@@ -69,13 +69,12 @@ public class Controller implements IController {
     @Override
     public void response() {
         compositeDisposable.add(
-            iChatIO.response().subscribe(v -> iPanel.response(v), Throwable::printStackTrace)
+                iChatIO.response().subscribe(v -> iPanel.response(v), Throwable::printStackTrace)
         );
     }
 
     @Override
     public void disconnect() {
-        compositeDisposable.dispose();
         if (iChatIO != null){
             iChatIO.disconnect();
             iChatIO = null;

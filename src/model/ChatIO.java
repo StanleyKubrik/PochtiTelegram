@@ -40,7 +40,7 @@ public class ChatIO extends BaseChatIO implements IChatIO {
     }
 
     @Override
-    public void disconnect() {
+    public void disconnect() { //throws IOException {
         writeUTF(Constant.TAG_exit);
         super.disconnect();
         //compositeDisposable.dispose();

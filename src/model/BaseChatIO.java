@@ -5,7 +5,10 @@ import io.reactivex.disposables.CompositeDisposable;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public abstract class BaseChatIO {
     protected Socket cs;
@@ -25,7 +28,7 @@ public abstract class BaseChatIO {
         }
     }
 
-    protected void disconnect(){
+    protected void disconnect() { //throws IOException {
         if (cs != null && cs.isConnected()){
             try {
                 in.close();
